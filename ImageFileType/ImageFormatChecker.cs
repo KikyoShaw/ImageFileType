@@ -27,6 +27,11 @@ namespace ImageFileType
         private static readonly byte[] WebPWebP = { 87, 69, 66, 80 }; // 'WEBP'
         private const int BufferLength = 12; // webp 需要这么长
 
+        /// <summary>
+        /// 解析入口
+        /// </summary>
+        /// <param name="stream">图片文件数据流</param>
+        /// <returns></returns>
         public static ImageFormat GetImageFormat(Stream stream)
         {
             var bytes = new byte[BufferLength];
@@ -34,6 +39,11 @@ namespace ImageFileType
             return read < BufferLength ? ImageFormat.Unknown : GetImageFormat(bytes);
         }
 
+        /// <summary>
+        /// 获取文件格式类型
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         public static ImageFormat GetImageFormat(byte[] bytes)
         {
             if (bytes.Length < BufferLength)
@@ -55,7 +65,6 @@ namespace ImageFileType
                 return ImageFormat.WebP;
 
             return ImageFormat.Unknown;
-
         }
     }
 }
